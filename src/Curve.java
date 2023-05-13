@@ -1,0 +1,4 @@
+interface Curve {
+    Double getLen();
+
+}
