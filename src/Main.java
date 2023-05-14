@@ -1,6 +1,6 @@
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -18,6 +18,7 @@ public class Main {
                     "3.Посчитать площадь у всех фигур\n" +
                     "4.Посчитать длины окружностей у всех фигур\n" +
                     "5.Удалить фигуру\n"+
+                    "6.Сортировать\n"+
                     "0.Выход");
             ex = scan.nextInt();
             switch (ex) {
@@ -40,8 +41,8 @@ public class Main {
                         case 4:
                             figDB.add(new Circle(Math.random() * 100));
                             break;
-                        case 5:
-                            figDB.remove(figDB.size());
+                        default:
+                            throw new IllegalStateException("Unexpected value: " + type);
                     }
                     break;
                 case 2:
@@ -61,7 +62,16 @@ public class Main {
                             System.out.println("Длина окружности = " + ((Circle) fig).getLen());
                     }
                     break;
-
+                case 5:
+                    figDB.remove(figDB.size());
+                    break;
+                case 6:
+                    figDB.sort(new AreaComporator());
+                    //Collections.sort((List) figDB);
+                    for (Figure fig : figDB) {
+                        System.out.println("Площадь " + fig.getClass().getSimpleName() + " = " + fig.getArea());
+                    }
+                    break;
             }
 
         }
